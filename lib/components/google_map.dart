@@ -23,28 +23,22 @@ class PlacesMapState extends State<PlacesMap> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Expanded(
-          child: PointerInterceptor(
-            child: GoogleMap(
-              initialCameraPosition: _kDefault,
-              onMapCreated: (GoogleMapController controller) {
-                _controller.complete(controller);
-              },
-              myLocationEnabled: true,
-              myLocationButtonEnabled: true,
-              onTap: (LatLng latLng) async {
-                final GoogleMapController controller = await _controller.future;
+    return PointerInterceptor(
+      child: GoogleMap(
+        initialCameraPosition: _kDefault,
+        onMapCreated: (GoogleMapController controller) {
+          _controller.complete(controller);
+        },
+        myLocationEnabled: true,
+        myLocationButtonEnabled: true,
+        onTap: (LatLng latLng) async {
+          final GoogleMapController controller = await _controller.future;
 
-                controller.animateCamera(CameraUpdate.newLatLng(latLng));
-              },
-              onCameraMove: (CameraPosition position) {
-              }
-            )
-          ),
-        )
-      ]
+          controller.animateCamera(CameraUpdate.newLatLng(latLng));
+        },
+        onCameraMove: (CameraPosition position) {
+        }
+      )
     );
   }
 }

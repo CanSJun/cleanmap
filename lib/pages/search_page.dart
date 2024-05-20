@@ -1,3 +1,4 @@
+import 'package:cleanmap/components/filter_card.dart';
 import 'package:cleanmap/components/google_map.dart';
 import 'package:cleanmap/components/search_bar.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class SearchPage extends StatelessWidget {
           builder: (BuildContext context) {
             return IconButton(
               icon: const Icon(Icons.arrow_back),
-              onPressed: () { },
+              onPressed: () => Navigator.pop(context),
             );
           }
         ),
@@ -22,7 +23,13 @@ class SearchPage extends StatelessWidget {
       body: const Stack(
         children: <Widget>[
           PlacesMap(),
-          PlacesSearchBar(),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              PlacesSearchBar(),
+              FilterCard()
+            ]
+          )
         ],
       )
     );

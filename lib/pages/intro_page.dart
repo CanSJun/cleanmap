@@ -25,9 +25,18 @@ class IntroPage extends StatelessWidget {
                 )
               )
             ),
-            IntroButton('배출 장소 찾기', onPressed: () {}),
-            IntroButton('배출 방법 확인', onPressed: () {}),
-            IntroButton('분리 수거 챗봇', onPressed: () {}),
+            IntroButton(
+              '배출 장소 찾기',
+              onPressed: () => Navigator.pushNamed(context, '/search')
+            ),
+            IntroButton(
+              '배출 방법 확인',
+              onPressed: () {}
+            ),
+            IntroButton(
+              '분리 수거 챗봇',
+              onPressed: () {}
+            ),
             Expanded(
               child: FutureBuilder(
                 future: getGitCommitHash(),

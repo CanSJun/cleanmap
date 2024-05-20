@@ -19,7 +19,7 @@ class IntroButton extends StatelessWidget {
         height: MediaQuery.of(context).size.height * 0.1,
         padding: const EdgeInsets.all(8.0),
         child: ElevatedButton(
-          onPressed: () {},
+          onPressed: onPressed,
           child: Text(
               text,
               style: const TextStyle(

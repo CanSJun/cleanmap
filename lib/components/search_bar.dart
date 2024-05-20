@@ -20,7 +20,7 @@ class PlacesSearchBar extends StatelessWidget {
               controller: controller,
               hintText: "주소 검색",
               padding: const WidgetStatePropertyAll<EdgeInsets>(
-                  EdgeInsets.symmetric(horizontal: 16.0)
+                EdgeInsets.symmetric(horizontal: 16.0)
               ),
               leading: const Icon(Icons.search),
               // onTap: () => controller.openView(),
