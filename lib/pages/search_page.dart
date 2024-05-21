@@ -3,9 +3,14 @@ import 'package:cleanmap/components/google_map.dart';
 import 'package:cleanmap/components/search_bar.dart';
 import 'package:flutter/material.dart';
 
-class SearchPage extends StatelessWidget {
+class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
 
+  @override
+  State<StatefulWidget> createState() => SearchPageState();
+}
+
+class SearchPageState extends State<SearchPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

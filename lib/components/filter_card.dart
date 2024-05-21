@@ -10,14 +10,72 @@ class FilterCard extends StatefulWidget {
 
 class FilterCardState extends State<FilterCard> {
   final List<Widget> filters = <Widget>[
-    const Text("일반"),
-    const Text("재활용"),
-    const Text("음식물")
+    Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 24.0
+      ),
+      child: RichText(
+        text: const TextSpan(
+          children: [
+            WidgetSpan(
+              child: Icon(Icons.delete, size: 18),
+            ),
+            TextSpan(
+              text: " 일반",
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 16
+              )
+            )
+          ]
+        )
+      ),
+    ),
+    Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 24.0
+      ),
+      child: RichText(
+        text: const TextSpan(
+          children: [
+            WidgetSpan(
+              child: Icon(Icons.compost, size: 18),
+            ),
+            TextSpan(
+              text: " 음식물",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16
+              )
+            )
+          ]
+        )
+      ),
+    ),
+    Padding(
+      padding: const EdgeInsets.symmetric(
+        horizontal: 24.0
+      ),
+      child: RichText(
+        text: const TextSpan(
+          children: [
+            WidgetSpan(
+              child: Icon(Icons.recycling, size: 18),
+            ),
+            TextSpan(
+              text: " 재활용",
+              style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16
+              )
+            )
+          ]
+        )
+      ),
+    )
   ];
 
-  final List<bool> _selectedFilters = <bool>[
-    true, false, false
-  ];
+  final List<bool> _selectedFilters = <bool>[true, false, false];
 
   @override
   Widget build(BuildContext context) {

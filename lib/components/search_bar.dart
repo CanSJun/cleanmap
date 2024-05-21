@@ -8,14 +8,11 @@ class PlacesSearchBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return PointerInterceptor(
       child: Container(
-        width: MediaQuery
-            .of(context)
-            .size
-            .width,
+        width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.all(8.0),
         child: SearchAnchor(
           builder: (BuildContext context,
-              SearchController controller) {
+            SearchController controller) {
             return SearchBar(
               controller: controller,
               hintText: "주소 검색",
@@ -28,11 +25,12 @@ class PlacesSearchBar extends StatelessWidget {
             );
           },
           suggestionsBuilder: (BuildContext context,
-              SearchController controller) {
+            SearchController controller) {
             return List<ListTile>.generate(
-                0, (int index) {
-              return const ListTile();
-            }
+              0,
+              (int index) {
+                return const ListTile();
+              }
             );
           },
         )
