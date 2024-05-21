@@ -40,7 +40,8 @@ class IntroPage extends StatelessWidget {
             Expanded(
               child: FutureBuilder(
                 future: getGitCommitHash(),
-                builder: (BuildContext context, AsyncSnapshot<String> snapshot) {
+                builder: (BuildContext context,
+                  AsyncSnapshot<String> snapshot) {
                   final String commitHash = (snapshot.hasData)
                     ? (snapshot.data)!.substring(0, 7)
                     : "unknown";
