@@ -1,8 +1,9 @@
-import 'package:csv/csv.dart';
 import 'package:cleanmap/models/place.dart';
+import 'package:csv/csv.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-const String datasetPath = "assets/datasets/DATA.GO.KR_15109940-20221212.csv";
+const String datasetPath = "datasets/15109940-20221212.csv";
 
 Future<List<Place>> loadDataset() async {
   return rootBundle.loadString(datasetPath).then(
@@ -20,8 +21,14 @@ Future<List<Place>> loadDataset() async {
          미수거일, 이미지 고유 번호] (26)
        */
 
-      // TODO: ...
-      return <Place>[];
+      return datasetRows.skip(1).map(
+        (List<dynamic> value) {
+          return Place(
+            markerId: value[1],
+            position: LatLng(value[10].toDouble(), value[11].toDouble())
+          );
+        }
+      ).toList();
     }
   );
 }

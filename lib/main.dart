@@ -3,6 +3,8 @@ import 'package:cleanmap/pages/search_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+
   runApp(
     MaterialApp(
       routes: {
@@ -10,8 +12,7 @@ void main() {
         '/search': (BuildContext context) => const SearchPage()
       },
       // When using `initialRoute`, don't define a `home` property.
-      // initialRoute: '/',
-      initialRoute: '/search',
+      initialRoute: '/',
       theme: ThemeData(
         appBarTheme: const AppBarTheme(
           elevation: 1.0

@@ -2,6 +2,8 @@ import 'package:cleanmap/components/intro_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../utils/parser.dart';
+
 class IntroPage extends StatelessWidget {
   const IntroPage({super.key});
 
