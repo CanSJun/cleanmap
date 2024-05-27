@@ -5,7 +5,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 const String datasetPath = "datasets/15109940-20221212.csv";
 
-Future<List<Place>> loadDataset() async {
+Future<Iterable<Place>> loadDataset() async {
   return rootBundle.loadString(datasetPath).then(
     (String datasetData) {
       List<List<dynamic>> datasetRows = const CsvToListConverter()
@@ -22,13 +22,16 @@ Future<List<Place>> loadDataset() async {
        */
 
       return datasetRows.skip(1).map(
-        (List<dynamic> value) {
-          return Place(
-            markerId: value[1],
-            position: LatLng(value[10].toDouble(), value[11].toDouble())
-          );
-        }
-      ).toList();
+          (List<dynamic> value) {
+            final double latitude = double.parse(value[10].toString());
+            final double longitude = double.parse(value[11].toString());
+
+            return Place(
+              markerId: MarkerId(value[1]),
+              position: LatLng(latitude, longitude)
+            );
+          }
+      );
     }
   );
 }

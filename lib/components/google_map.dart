@@ -17,8 +17,6 @@ class PlacesMapState extends State<PlacesMap> {
   final Completer<GoogleMapController> _controller =
     Completer<GoogleMapController>();
 
-  Set<Place> _places = {};
-
   // 대전광역시 유성구 계룡로113번길 73
   static const CameraPosition _kDefault = CameraPosition(
       target: LatLng(36.356752, 127.344406),
@@ -30,7 +28,13 @@ class PlacesMapState extends State<PlacesMap> {
     return PointerInterceptor(
       child: FutureBuilder(
         future: loadDataset(),
-        builder: (BuildContext context, AsyncSnapshot<List<Place>> snapshot) {
+        builder: (BuildContext context, AsyncSnapshot<Iterable<Place>> snapshot) {
+          Set<Place> _places = {};
+
+          if (snapshot.hasData) {
+            _places = snapshot.data!.toSet();
+          }
+
           return GoogleMap(
             initialCameraPosition: _kDefault,
             onMapCreated: (GoogleMapController controller) {
