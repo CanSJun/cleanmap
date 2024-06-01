@@ -9,7 +9,7 @@ Future<Iterable<Place>> loadDataset() async {
   return rootBundle.loadString(datasetPath).then(
     (String datasetData) {
       List<List<dynamic>> datasetRows = const CsvToListConverter()
-        .convert(datasetData);
+        .convert(datasetData, eol: "\n");
 
       /*
         [연번, 고유 번호, 위치 번호, 유형,
@@ -22,15 +22,15 @@ Future<Iterable<Place>> loadDataset() async {
        */
 
       return datasetRows.skip(1).map(
-          (List<dynamic> value) {
-            final double latitude = double.parse(value[10].toString());
-            final double longitude = double.parse(value[11].toString());
+        (List<dynamic> value) {
+          final double latitude = double.parse(value[10].toString());
+          final double longitude = double.parse(value[11].toString());
 
-            return Place(
-              markerId: MarkerId(value[1]),
-              position: LatLng(latitude, longitude)
-            );
-          }
+          return Place(
+            markerId: MarkerId(value[1]),
+            position: LatLng(latitude, longitude)
+          );
+        }
       );
     }
   );

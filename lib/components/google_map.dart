@@ -28,11 +28,12 @@ class PlacesMapState extends State<PlacesMap> {
     return PointerInterceptor(
       child: FutureBuilder(
         future: loadDataset(),
-        builder: (BuildContext context, AsyncSnapshot<Iterable<Place>> snapshot) {
-          Set<Place> _places = {};
+        builder: (BuildContext context,
+            AsyncSnapshot<Iterable<Place>> snapshot) {
+          Set<Place> places = {};
 
           if (snapshot.hasData) {
-            _places = snapshot.data!.toSet();
+            places = snapshot.data!.toSet();
           }
 
           return GoogleMap(
@@ -42,13 +43,11 @@ class PlacesMapState extends State<PlacesMap> {
             },
             myLocationEnabled: true,
             myLocationButtonEnabled: true,
-            markers: _places,
+            markers: places,
             onTap: (LatLng latLng) async {
               final GoogleMapController controller = await _controller.future;
 
               controller.animateCamera(CameraUpdate.newLatLng(latLng));
-            },
-            onCameraMove: (CameraPosition position) {
             }
           );
         }
