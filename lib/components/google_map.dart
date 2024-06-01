@@ -20,7 +20,7 @@ class PlacesMapState extends State<PlacesMap> {
   // 대전광역시 유성구 계룡로113번길 73
   static const CameraPosition _kDefault = CameraPosition(
     target: LatLng(36.356752, 127.344406),
-    zoom: 17.5
+    zoom: 18.0
   );
 
   Set<Place> places = {};
@@ -31,30 +31,26 @@ class PlacesMapState extends State<PlacesMap> {
       child: FutureBuilder(
         future: loadDataset(),
         builder: (BuildContext context,
-            AsyncSnapshot<Iterable<Place>> snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          } else {
+          AsyncSnapshot<Iterable<Place>> snapshot) {
+          if (snapshot.hasData) {
             places = snapshot.data!.toSet();
-
-            return GoogleMap(
-              initialCameraPosition: _kDefault,
-              onMapCreated: (GoogleMapController controller) {
-                _controller.complete(controller);
-              },
-              myLocationEnabled: true,
-              myLocationButtonEnabled: true,
-              // markers: places,
-              onTap: (LatLng latLng) async {
-                final GoogleMapController controller = await _controller
-                    .future;
-
-                controller.animateCamera(CameraUpdate.newLatLng(latLng));
-              }
-            );
           }
+
+          return GoogleMap(
+            initialCameraPosition: _kDefault,
+            onMapCreated: (GoogleMapController controller) {
+              _controller.complete(controller);
+            },
+            myLocationEnabled: true,
+            myLocationButtonEnabled: true,
+            markers: places,
+            onTap: (LatLng latLng) async {
+              final GoogleMapController controller = await _controller
+                .future;
+
+              controller.animateCamera(CameraUpdate.newLatLng(latLng));
+            },
+          );
         }
       )
     );

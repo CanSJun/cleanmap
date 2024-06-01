@@ -36,12 +36,25 @@ Future<Iterable<Place>> loadDataset() async {
 
       return datasetRows.skip(1).map(
         (List<dynamic> value) {
+          final WasteType wasteType = WasteType.fromString(value[3]);
+
           final String title = !(value[7].isEmpty) ? value[7] : value[8];
 
-          // TODO: ...
+          final String disposalDays = switch (wasteType) {
+            WasteType.food => value[20],
+            WasteType.recyclable => value[22],
+            _ => value[18]
+          };
+
+          final String disposalTime = switch (wasteType) {
+            WasteType.food => value[21],
+            WasteType.recyclable => value[23],
+            _ => value[19]
+          };
+
           final String snippet = "<b>유형:</b> ${value[3]}<br>"
-            "<b>배출 요일: </b>...<br>"
-            "<b>배출 시간: </b>...<br>";
+            "<b>배출 요일: </b>$disposalDays<br>"
+            "<b>배출 시간: </b>$disposalTime<br>";
 
           final double latitude = double.parse(value[10].toString());
           final double longitude = double.parse(value[11].toString());
@@ -53,7 +66,7 @@ Future<Iterable<Place>> loadDataset() async {
               snippet: snippet
             ),
             position: LatLng(latitude, longitude),
-            wasteType: WasteType.fromString(value[3])
+            wasteType: wasteType
           );
         }
       );

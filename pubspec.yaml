@@ -36,9 +36,10 @@ dependencies:
   cupertino_icons: ^1.0.6
   flutter_google_places: ^0.3.0
   flutter_native_splash: ^2.4.0
-  google_maps_flutter: ^2.6.1
-  google_maps_flutter_web: ^0.5.7
-  google_maps_flutter_platform_interface: ^2.6.0
+  google_maps_cluster_manager: ^3.1.0
+  google_maps_flutter: ^2.5.3
+  google_maps_flutter_web: ^0.5.0+1
+  google_maps_flutter_platform_interface: 2.4.3
   pointer_interceptor: ^0.10.1+1
 
 dev_dependencies:
