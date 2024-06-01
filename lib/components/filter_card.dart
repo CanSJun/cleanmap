@@ -44,8 +44,8 @@ class FilterCardState extends State<FilterCard> {
             TextSpan(
               text: " 음식물",
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16
+                color: Colors.white,
+                fontSize: 16
               )
             )
           ]
@@ -65,8 +65,8 @@ class FilterCardState extends State<FilterCard> {
             TextSpan(
               text: " 재활용",
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16
+                color: Colors.white,
+                fontSize: 16
               )
             )
           ]

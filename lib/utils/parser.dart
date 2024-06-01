@@ -1,9 +1,22 @@
 import 'package:cleanmap/models/place.dart';
+import 'package:cleanmap/utils/constants.dart';
 import 'package:csv/csv.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
-const String datasetPath = "datasets/15109940-20221212.csv";
+enum WasteType {
+  general,
+  food,
+  recyclable,
+  large;
+
+  static WasteType fromString(String str) => switch (str) {
+    "음식물쓰레기" => food,
+    "재활용품" => recyclable,
+    "생활폐기물" => large,
+    _ => general,
+  };
+}
 
 Future<Iterable<Place>> loadDataset() async {
   return rootBundle.loadString(datasetPath).then(
@@ -23,12 +36,24 @@ Future<Iterable<Place>> loadDataset() async {
 
       return datasetRows.skip(1).map(
         (List<dynamic> value) {
+          final String title = !(value[7].isEmpty) ? value[7] : value[8];
+
+          // TODO: ...
+          final String snippet = "<b>유형:</b> ${value[3]}<br>"
+            "<b>배출 요일: </b>...<br>"
+            "<b>배출 시간: </b>...<br>";
+
           final double latitude = double.parse(value[10].toString());
           final double longitude = double.parse(value[11].toString());
 
           return Place(
             markerId: MarkerId(value[1]),
-            position: LatLng(latitude, longitude)
+            infoWindow: InfoWindow(
+              title: title,
+              snippet: snippet
+            ),
+            position: LatLng(latitude, longitude),
+            wasteType: WasteType.fromString(value[3])
           );
         }
       );
