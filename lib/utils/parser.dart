@@ -38,6 +38,12 @@ Future<Iterable<Place>> loadDataset() async {
         (List<dynamic> value) {
           final WasteType wasteType = WasteType.fromString(value[3]);
 
+          final double iconColor = switch (wasteType) {
+            WasteType.food => BitmapDescriptor.hueYellow,
+            WasteType.recyclable => BitmapDescriptor.hueGreen,
+            _ => BitmapDescriptor.hueRed
+          };
+
           final String title = !(value[7].isEmpty) ? value[7] : value[8];
 
           final String disposalDays = switch (wasteType) {
@@ -61,6 +67,7 @@ Future<Iterable<Place>> loadDataset() async {
 
           return Place(
             markerId: MarkerId(value[1]),
+            icon: BitmapDescriptor.defaultMarkerWithHue(iconColor),
             infoWindow: InfoWindow(
               title: title,
               snippet: snippet

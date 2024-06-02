@@ -6,6 +6,7 @@ class Place extends Marker {
 
   const Place({
     required super.markerId,
+    super.icon,
     super.infoWindow,
     super.position,
     this.wasteType = WasteType.general

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:cleanmap/components/filter_card.dart';
 import 'package:cleanmap/components/google_map.dart';
 import 'package:cleanmap/components/search_bar.dart';
@@ -11,6 +13,8 @@ class SearchPage extends StatefulWidget {
 }
 
 class SearchPageState extends State<SearchPage> {
+  StreamController<List<bool>> controller = StreamController<List<bool>>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,14 +29,14 @@ class SearchPageState extends State<SearchPage> {
         ),
         title: const Text("주소")
       ),
-      body: const Stack(
+      body: Stack(
         children: <Widget>[
-          PlacesMap(),
+          PlacesMap(stream: controller.stream),
           Column(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              PlacesSearchBar(),
-              FilterCard()
+              const PlacesSearchBar(),
+              FilterCard(controller: controller)
             ]
           )
         ],
