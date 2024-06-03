@@ -77,7 +77,7 @@ class PlacesMapState extends State<PlacesMap> {
                   onMapCreated: (GoogleMapController controller) {
                     _completer.complete(controller);
                   },
-                  zoomControlsEnabled: false,
+                  zoomControlsEnabled: true,
                   myLocationEnabled: true,
                   myLocationButtonEnabled: true,
                   markers: places,

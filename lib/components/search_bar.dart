@@ -21,7 +21,12 @@ class PlacesSearchBar extends StatelessWidget {
               ),
               leading: const Icon(Icons.search),
               // onTap: () => controller.openView(),
-              // onChanged: (_) => controller.openView()
+              // onChanged: (_) => controller.openView(),
+              shape: WidgetStatePropertyAll<OutlinedBorder>(
+                ContinuousRectangleBorder(
+                  borderRadius: BorderRadius.circular(24.0)
+                )
+              ),
             );
           },
           suggestionsBuilder: (BuildContext context,

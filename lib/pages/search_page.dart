@@ -33,7 +33,7 @@ class SearchPageState extends State<SearchPage> {
         children: <Widget>[
           PlacesMap(stream: controller.stream),
           Column(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            mainAxisAlignment: MainAxisAlignment.start,
             children: [
               const PlacesSearchBar(),
               FilterCard(controller: controller)

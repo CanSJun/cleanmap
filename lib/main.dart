@@ -18,7 +18,7 @@ void main() {
           elevation: 1.0
         ),
         colorScheme: ColorScheme.fromSeed(
-          brightness: Brightness.dark,
+          brightness: Brightness.light,
           seedColor: Colors.green
         ),
       )

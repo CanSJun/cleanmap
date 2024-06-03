@@ -13,72 +13,6 @@ class FilterCard extends StatefulWidget {
 }
 
 class FilterCardState extends State<FilterCard> {
-  final List<Widget> filters = <Widget>[
-    Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 24.0
-      ),
-      child: RichText(
-        text: const TextSpan(
-          children: [
-            WidgetSpan(
-              child: Icon(Icons.delete, size: 18),
-            ),
-            TextSpan(
-              text: " 일반",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16
-              )
-            )
-          ]
-        )
-      ),
-    ),
-    Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 24.0
-      ),
-      child: RichText(
-        text: const TextSpan(
-          children: [
-            WidgetSpan(
-              child: Icon(Icons.compost, size: 18),
-            ),
-            TextSpan(
-              text: " 음식물",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16
-              )
-            )
-          ]
-        )
-      ),
-    ),
-    Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 24.0
-      ),
-      child: RichText(
-        text: const TextSpan(
-          children: [
-            WidgetSpan(
-              child: Icon(Icons.recycling, size: 18),
-            ),
-            TextSpan(
-              text: " 재활용",
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 16
-              )
-            )
-          ]
-        )
-      ),
-    )
-  ];
-
   final List<bool> selectedFilters = <bool>[true, false, false];
 
   @override
@@ -90,26 +24,78 @@ class FilterCardState extends State<FilterCard> {
 
   @override
   Widget build(BuildContext context) {
+    final List<Widget> filters = <Widget>[
+      RichText(
+        text: const TextSpan(
+          children: [
+            WidgetSpan(
+              child: Icon(Icons.delete, size: 18),
+            ),
+            TextSpan(
+              text: " 일반",
+              style: TextStyle(
+                fontSize: 16
+              )
+            )
+          ]
+        )
+      ),
+      RichText(
+        text: const TextSpan(
+          children: [
+            WidgetSpan(
+              child: Icon(Icons.compost, size: 18),
+            ),
+            TextSpan(
+              text: " 음식물",
+              style: TextStyle(
+                  fontSize: 16
+              )
+            )
+          ]
+        )
+      ),
+      RichText(
+        text: const TextSpan(
+          children: [
+            WidgetSpan(
+              child: Icon(Icons.recycling, size: 18),
+            ),
+            TextSpan(
+              text: " 재활용",
+              style: TextStyle(
+                  fontSize: 16
+              )
+            )
+          ]
+        )
+      ),
+    ];
+
+    final BorderRadius borderRadius = BorderRadius.circular(32.0);
+
     return PointerInterceptor(
       // debug: true,
-      child: Align(
-        alignment: Alignment.bottomCenter,
-        child: Container(
-          padding: const EdgeInsets.all(4.0),
-          child: Card(
-            child: ToggleButtons(
-              isSelected: selectedFilters,
-              children: filters,
-              onPressed: (int i) {
-                // All buttons are selectable.
-                setState(() {
-                  selectedFilters[i] = !selectedFilters[i];
+      child: Card(
+        shape: RoundedRectangleBorder(
+          borderRadius: borderRadius
+        ),
+        child: ToggleButtons(
+          isSelected: selectedFilters,
+          onPressed: (int i) {
+            // All buttons are selectable.
+            setState(() {
+              selectedFilters[i] = !selectedFilters[i];
 
-                  widget.controller.add(selectedFilters);
-                });
-              },
-            )
-          )
+              widget.controller.add(selectedFilters);
+            });
+          },
+          constraints: BoxConstraints(
+            minWidth: (MediaQuery.of(context).size.width - 18.0) / 3.0,
+            minHeight: 36.0
+          ),
+          borderRadius: borderRadius,
+          children: filters
         )
       )
     );
