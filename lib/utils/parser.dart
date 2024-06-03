@@ -29,16 +29,16 @@ Future<Iterable<Place>> loadDataset() async {
       "assets/images/delete-48dp.png"
     ),
     await BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(
-            size: Size(28.0, 28.0)
-        ),
-        "assets/images/compost-48dp.png"
+      const ImageConfiguration(
+          size: Size(28.0, 28.0)
+      ),
+      "assets/images/compost-48dp.png"
     ),
     await BitmapDescriptor.fromAssetImage(
-        const ImageConfiguration(
-            size: Size(28.0, 28.0)
-        ),
-        "assets/images/recycling-48dp.png"
+      const ImageConfiguration(
+          size: Size(28.0, 28.0)
+      ),
+      "assets/images/recycling-48dp.png"
     )
   ];
 

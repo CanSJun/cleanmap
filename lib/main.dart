@@ -19,7 +19,7 @@ void main() {
         ),
         colorScheme: ColorScheme.fromSeed(
           brightness: Brightness.dark,
-          seedColor: Colors.white
+          seedColor: Colors.green
         ),
       )
     )
