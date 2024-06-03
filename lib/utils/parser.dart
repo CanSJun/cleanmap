@@ -1,6 +1,7 @@
 import 'package:cleanmap/models/place.dart';
 import 'package:cleanmap/utils/constants.dart';
 import 'package:csv/csv.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
@@ -19,6 +20,28 @@ enum WasteType {
 }
 
 Future<Iterable<Place>> loadDataset() async {
+  // NOTE: https://fonts.google.com/icons
+  List<BitmapDescriptor> placeIcons = [
+    await BitmapDescriptor.fromAssetImage(
+      const ImageConfiguration(
+        size: Size(28.0, 28.0)
+      ),
+      "assets/images/delete-48dp.png"
+    ),
+    await BitmapDescriptor.fromAssetImage(
+        const ImageConfiguration(
+            size: Size(28.0, 28.0)
+        ),
+        "assets/images/compost-48dp.png"
+    ),
+    await BitmapDescriptor.fromAssetImage(
+        const ImageConfiguration(
+            size: Size(28.0, 28.0)
+        ),
+        "assets/images/recycling-48dp.png"
+    )
+  ];
+
   return rootBundle.loadString(datasetPath).then(
     (String datasetData) {
       List<List<dynamic>> datasetRows = const CsvToListConverter()
@@ -38,10 +61,10 @@ Future<Iterable<Place>> loadDataset() async {
         (List<dynamic> value) {
           final WasteType wasteType = WasteType.fromString(value[3]);
 
-          final double iconColor = switch (wasteType) {
-            WasteType.food => BitmapDescriptor.hueYellow,
-            WasteType.recyclable => BitmapDescriptor.hueGreen,
-            _ => BitmapDescriptor.hueRed
+          final int index = switch (wasteType) {
+            WasteType.food => 1,
+            WasteType.recyclable => 2,
+            _ => 0
           };
 
           final String title = !(value[7].isEmpty) ? value[7] : value[8];
@@ -67,7 +90,7 @@ Future<Iterable<Place>> loadDataset() async {
 
           return Place(
             markerId: MarkerId(value[1]),
-            icon: BitmapDescriptor.defaultMarkerWithHue(iconColor),
+            icon: placeIcons[index],
             infoWindow: InfoWindow(
               title: title,
               snippet: snippet

@@ -91,6 +91,7 @@ class FilterCardState extends State<FilterCard> {
   @override
   Widget build(BuildContext context) {
     return PointerInterceptor(
+      // debug: true,
       child: Align(
         alignment: Alignment.bottomCenter,
         child: Container(
