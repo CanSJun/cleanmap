@@ -61,42 +61,31 @@ Future<Iterable<Place>> loadDataset() async {
         (List<dynamic> value) {
           final WasteType wasteType = WasteType.fromString(value[3]);
 
-          final int index = switch (wasteType) {
-            WasteType.food => 1,
-            WasteType.recyclable => 2,
-            _ => 0
-          };
-
-          final String title = !(value[7].isEmpty) ? value[7] : value[8];
-
-          final String disposalDays = switch (wasteType) {
-            WasteType.food => value[20],
-            WasteType.recyclable => value[22],
-            _ => value[18]
-          };
-
-          final String disposalTime = switch (wasteType) {
-            WasteType.food => value[21],
-            WasteType.recyclable => value[23],
-            _ => value[19]
-          };
-
-          final String snippet = "<b>유형:</b> ${value[3]}<br>"
-            "<b>배출 요일: </b>$disposalDays<br>"
-            "<b>배출 시간: </b>$disposalTime<br>";
-
           final double latitude = double.parse(value[10].toString());
           final double longitude = double.parse(value[11].toString());
 
           return Place(
-            markerId: MarkerId(value[1]),
-            icon: placeIcons[index],
-            infoWindow: InfoWindow(
-              title: title,
-              snippet: snippet
-            ),
-            position: LatLng(latitude, longitude),
-            wasteType: wasteType
+            name: value[1],
+            latLng: LatLng(latitude, longitude),
+            address: !(value[7].isEmpty) ? value[7] : value[8],
+            wasteType: wasteType,
+            disposalDays: switch (wasteType) {
+              WasteType.food => value[20],
+              WasteType.recyclable => value[22],
+              _ => value[18]
+            },
+            disposalTime: switch (wasteType) {
+              WasteType.food => value[21],
+              WasteType.recyclable => value[23],
+              _ => value[19]
+            },
+            icon: placeIcons[
+              switch (wasteType) {
+                WasteType.food => 1,
+                WasteType.recyclable => 2,
+                _ => 0
+              }
+            ]
           );
         }
       );
